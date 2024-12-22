@@ -1,51 +1,39 @@
-import { useEffect, useState } from "react"
-import { MdDeleteForever } from "react-icons/md";
-
+import {  useState } from "react"
+import { TodoForm } from "./Todoform";
+import { TodoList } from "./Todolist";
 import "./Todo.css"
+import { TodoDate } from "./TodoDate";
 
 export default function Todo() {
 
-    const [inputValue,setInputValue]=useState("");
     const [task,setTask]=useState([]);
-    const [dateTime,setDateTime]=useState("");
 
-    const handleInputChange=(value)=>{
-      setInputValue(value);
-    };
-
-    const handleFormSubmit=(event)=>{
-      event.preventDefault();
+    const handleFormSubmit=(inputValue)=>{
       
-      if(!inputValue)return;
+      const { id, content, checked }=inputValue;
 
-      if(task.includes(inputValue)) { 
-        setInputValue("");
-        return;
-      }
-      setTask((prevTask)=>[...prevTask,inputValue]);
+      //To check if the input field is empty or not
+      if(!content)return;
+
+      //To check if data is already exist or not
+      if(task.includes(inputValue))return;
+
+      const ifTodoContentMatched =task.find(
+        (curTask)=>curTask.content ===content
+      );
+
+      if(ifTodoContentMatched)return;
+
+      setTask((prevTask)=>[...prevTask,{id, content , checked}
+
+      ]);
       
-      setInputValue("");
     };
-
-  //Date and Time
-
-  useEffect(()=>{
-
-    const interval =setInterval(()=>{
-      const now =new Date();
-      const formattedDate =now.toLocaleDateString();
-        const formatteTime =now.toLocaleTimeString();
-        setDateTime(formattedDate+" - "+formatteTime);  
-        },1000);
-
-        return ()=> clearInterval(interval);
-  },[]);
 
   //Todo Delete handleDeleteTodo function
-
   const handleDeleteTodo =(value)=>{
 
-    const updateTask = task.filter((curTask)=> curTask!==value)
+    const updateTask = task.filter((curTask)=> curTask.content!==value)
     setTask(updateTask);
 
   }
@@ -54,6 +42,22 @@ export default function Todo() {
     setTask([]);
   }
 
+const handleCheckTodo =(content)=>{
+
+  const updateTask = task.map((curTask)=>{
+  
+    if(curTask.content === content){
+      return {...curTask, checked : !curTask.checked}
+    }
+    else{
+      return curTask;
+    }
+    
+  })
+
+  setTask(updateTask )
+
+}
     
  
 
@@ -64,36 +68,20 @@ export default function Todo() {
     <div className="todo-content">
  <header>
  <h1>Todo List</h1>
- <h3 className="date-time">{dateTime}</h3>
+ <TodoDate/>
  </header>
- <section className="form">
-    <form onSubmit={handleFormSubmit} >
-        <div>
-            <input
-             type="text" 
-             className="todo-input " 
-             autoComplete="off" 
-             value={inputValue}
-             onChange={(event)=>handleInputChange(event.target.value)}
-             />
-        </div>
-        <div> 
-            <button type="submit" className="todo-btn">Add Task</button>
-        </div>
-    </form>
- </section>
+<TodoForm onAddTodo={ handleFormSubmit}/>
  </div>
  <section className="todo-list">
   <ul>{
-    task.map((curTask,index) => {
-      return <li key={index}>
-        <span>{curTask}</span>
-        <button
-         className="delete-btn"
-         onClick={()=>handleDeleteTodo(curTask)}
-         ><MdDeleteForever className="delete-icon" />  
-           </button>
-      </li>
+    task.map((curTask) => {
+      return( <TodoList
+        key={curTask.id} 
+        data={curTask.content}
+        checked={curTask.checked}
+      onHandleDeleteTodo ={handleDeleteTodo}
+      onHandleCheckedTodo ={handleCheckTodo}
+       />);
     })
     }
   </ul>

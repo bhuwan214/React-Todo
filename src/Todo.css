@@ -76,6 +76,9 @@ input{
     width: 250px;
     border-radius:8px 0 0 8px;
     border: none;
+    font-weight: bolder;
+    font-size: 13px;
+    letter-spacing: .5px;
 }
 
 input[type="text"]:focus {
@@ -83,7 +86,7 @@ input[type="text"]:focus {
   }
 
 
-.todo-btn,button{
+.todo-btn{
     height: 40px;
     font-size: 16px;
     font-weight: bolder;
@@ -105,7 +108,14 @@ cursor: pointer;
     flex-direction: column;
     gap: 15px;
  }
+.checkList{
+    text-decoration: line-through 1.5px;
+    
+}
 
+.notCheckList{
+    text-decoration: none;
+}
 
 li{
     list-style: none;
@@ -127,14 +137,30 @@ li{
   color: red;
   border: none;
   padding-right:15px;
+  font-size: 22px;
 }
+
 
 .delete-icon:hover{
     scale: 1.2;
-    cursor: pointer;
+ cursor: pointer;
 }
 
+.check-btn{
+background-color: white;
+font-size: 20px;    
+}
+
+button{border: none;}
+
 .clear-btn{
+    height: 40px;
+    font-size: 16px;
+    font-weight: bolder;
+    padding: 9px;
+    border-radius: 0 9px 9px 0;
+    border: none;
+    color: var(--secondary-font);
     background: rgb(223, 57, 57);
     border-radius: 10px;
     margin: 20px;
@@ -142,5 +168,32 @@ li{
 }
 
 span{
+    height: 50px;
 padding-left:20px;
+display: flex;
+justify-self: center;
+align-items: center;
+gap: 10px;
+font-size: 20px;
+font-weight: 600;
+text-transform: capitalize;
 }
+
+input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 10px;
+    height: 10px;
+    border: 2px solid #0a0a0a;
+    border-radius:50%;
+    outline: none;
+    cursor: pointer;
+  }
+
+  input[type="checkbox"]:checked {
+    background-color: #007bff;
+    border-color: #000000;
+  }
+
+  
