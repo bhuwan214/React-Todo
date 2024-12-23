@@ -13,7 +13,7 @@ export default function Todo() {
       const { id, content, checked }=inputValue;
 
       //To check if the input field is empty or not
-      if(!content)return;
+      if(inputValue.content.trim()==="")return;
 
       //To check if data is already exist or not
       if(task.includes(inputValue))return;
