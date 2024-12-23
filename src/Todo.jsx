@@ -3,11 +3,17 @@ import { TodoForm } from "./Todoform";
 import { TodoList } from "./Todolist";
 import "./Todo.css"
 import { TodoDate } from "./TodoDate";
+import { getLocalStorageData, setLocalStorageData } from "./localStorage";
+
 
 export default function Todo() {
 
-    const [task,setTask]=useState([]);
 
+
+    const [task,setTask]=useState(()=>getLocalStorageData());
+
+
+//Form sumbit function
     const handleFormSubmit=(inputValue)=>{
       
       const { id, content, checked }=inputValue;
@@ -30,6 +36,10 @@ export default function Todo() {
       
     };
 
+//  LocalStorage handling function
+setLocalStorageData(task)
+
+
   //Todo Delete handleDeleteTodo function
   const handleDeleteTodo =(value)=>{
 
@@ -38,10 +48,12 @@ export default function Todo() {
 
   }
  
+//Clear button function
   const handleclearTodoData=()=>{
     setTask([]);
   }
 
+//Check and Uncheck  function
 const handleCheckTodo =(content)=>{
 
   const updateTask = task.map((curTask)=>{
@@ -56,10 +68,7 @@ const handleCheckTodo =(content)=>{
   })
 
   setTask(updateTask )
-
 }
-    
- 
 
 
   return (
