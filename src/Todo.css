@@ -1,10 +1,16 @@
 :root{
-   --page-background:#E4E3DF;
+   --page-background:#E9F5F7;
    --primary-font:#161617;
    --secondary-font:#FEFFFF;
    --primary-btn:#6248ff;
    --hover-btn:#4727fc;
-   --list-color:#FEFFFF;
+   --list-color:#FEF9EB;
+}
+
+@font-face {
+    font-family: Roboto-Mono;
+    src: url(./assets/RobotoMono-Bold.ttf);
+
 }
 
 
@@ -117,17 +123,28 @@ cursor: pointer;
     text-decoration: none;
 }
 
+ li span{
+    height: auto;
+    padding: 10px 0;
+    font-family: Roboto-Mono;
+    font-size: 15px;
+
+}
+
 li{
     list-style: none;
     background-color: var(--list-color);
     border-radius:20px;
     min-width: 200px;
-    /* width: max-content; */
-    height: max-content;
+    max-width: 80vw;
+    line-break: normal;
+    min-height: 4rem;
+height: auto;
+padding:0 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 10px;
+    gap: 20px;
 }
 
 
@@ -147,7 +164,7 @@ li{
 }
 
 .check-btn{
-background-color: white;
+background-color: #FEF9EB;
 font-size: 20px;    
 }
 
